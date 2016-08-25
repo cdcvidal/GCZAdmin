@@ -1,11 +1,7 @@
 platforms
 plugins
 node_modules
-app_modules/main/config.js
-build/index.html
-build/app.js
-build/styles.css
-build/styles.css.map
+www/index.js
 tests/test-suite.js
 .DS_Store
 npm-debug.log
