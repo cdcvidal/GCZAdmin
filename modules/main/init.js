@@ -23,6 +23,11 @@ var Backbone = require('backbone'),
     Router = require('../routing/router'),
     css_browser_selector = require('css_browser_selector');
 
+
+/* jshint ignore:start */
+var lock = new Auth0Lock('LLIeCazHTJS8odUmdhrG2enWwPinrj51', 'humm-server.eu.auth0.com');
+/* jshint ignore:end */
+
 function init() {
     $('html').addClass(document.ontouchstart === undefined ? 'notouch' : 'touch');
     
@@ -43,7 +48,6 @@ function init() {
     getI18n = function() {
         var dfd = $.Deferred();
         var userLanguage = 'en';
-        //console.log(navigator);
         if( !navigator.language) // ie 10
         {
             userLanguage = localStorage.getItem('userLanguage_'+appConfig.baseUrl) || navigator.userLanguage.split('-').shift() ;
@@ -80,7 +84,7 @@ function init() {
 
     getI18n()
         .then(function() {
-            var token = localStorage.getItem('auth0_token_'+appConfig.baseUrl);
+            var token = localStorage.getItem('auth0Token');
             if (token !== null) {
                 //atob won't be supported by IE<10
                 var jwt_body = JSON.parse(atob(token.split('.')[1]));
@@ -94,7 +98,14 @@ function init() {
                 } else {
                     // cookie is still valid
                     console.info('the session is valid to ' + expDate);
-                    return session.updateProfile(token);
+                    var dfd = $.Deferred();
+                    /* jshint ignore:start */
+                    lock.getProfile(token, function(err, profile) {
+                      session.open(profile, token);
+                      dfd.resolve();
+                    });
+                    /* jshint ignore:end */
+                    return dfd.promise();
                 }
             }
             return null;

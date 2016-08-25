@@ -18,21 +18,6 @@ var Layout = Marionette.LayoutView.extend({
   initialize: function() {
   },
 
-  loginSuccess: function(resp) {
-    Router.getInstance().navigate('devices', {trigger:true});
-    var serverTime = new Date() - this.measurementServerStart;
-    /* jshint ignore:start */
-      ga('send', 'timing', 'Login : '+ localStorage.getItem('clusterName_'+appConfig.baseUrl), 'success', serverTime);
-    /* jshint ignore:end */
-  },
-
-  loginFailure: function() {
-    var serverTime = new Date() - this.measurementServerStart;
-    /* jshint ignore:start */
-    ga('send', 'timing', 'Login', 'error', serverTime);
-    /* jshint ignore:end */
-  },
-
   render: function(options) {
      // jshint ignore:start
     var self = this;
@@ -43,31 +28,14 @@ var Layout = Marionette.LayoutView.extend({
       icon : "./images/logo_login.png"
     },function (err, profile, token) {
       if( err ){
-        self.loginFailure();
+        console.log(err);
       }
       else{
-        self.setLocalStorage(profile,token);
-        var dfd = session.open();
-        setTimeout(function(){
-          $.when( dfd ).done(function(){
-            self.loginSuccess(profile);
-          });
-        }, 0);
+        session.open(profile, token);
+        Router.getInstance().navigate('', {trigger:true});
       }
     });
     // jshint ignore:end
-  },
-
-  setLocalStorage: function(profile, token) {
-     localStorage.setItem('auth0_token_'+appConfig.baseUrl, token);
-     localStorage.setItem('userEmail_'+appConfig.baseUrl, profile.email);
-      if (profile.user_metadata) {
-        localStorage.setItem('userName_'+appConfig.baseUrl, profile.user_metadata.name);
-      }
-     if(profile.app_metadata){
-        localStorage.setItem('clusterName_'+appConfig.baseUrl , profile.app_metadata.cluster_name);
-        localStorage.setItem('clusterId_'+appConfig.baseUrl , profile.app_metadata.msid);
-     }
   }
 });
 

@@ -1,11 +1,6 @@
 'use strict';
 var Backbone = require('backbone');
 
-var Model = Backbone.Model.extend({
-    defaults: {
-        username: '',
-        email: ''
-    }
-});
+var Model = Backbone.Model.extend();
 
 module.exports = Model;

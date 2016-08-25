@@ -7,7 +7,6 @@ var session = require('../main/session');
 var Main = require('../main/main.view');
 var Login = require('../user/login.view');
 
-
 module.exports = Marionette.Object.extend({
     goToLogin: function() {
         Router.getInstance().navigate('#login', {
@@ -16,9 +15,10 @@ module.exports = Marionette.Object.extend({
     },
 
     indexAction: function() {
-        Router.getInstance().navigate('#devices', {
+        console.log(session.attributes);
+        /*Router.getInstance().navigate('#devices', {
             trigger: true
-        });
+        });*/
     },
 
     logoutAction: function() {
@@ -30,6 +30,10 @@ module.exports = Marionette.Object.extend({
         Main.getInstance().rgMain.show(new Login(), {
             preventDestroy: true
         });
+    },
+
+    clustersAction: function(){
+
     }
 
 });

@@ -5,6 +5,7 @@ var Marionette = require('backbone.marionette'),
     session = require('../main/session'),
     appConfig = require('../main/config'),
     $ = require('jquery');
+var _ = require('lodash');
 var t = require('i18next-client').t;
 
 var View = Marionette.LayoutView.extend({
@@ -43,8 +44,7 @@ var View = Marionette.LayoutView.extend({
 
     serializeData: function() {
         return {
-            username: session.get('fullname'),
-            cluster: localStorage.getItem('clusterName_'+appConfig.baseUrl), //session.get('cluster_name'),
+            username: _.get(session.get('user'), 'userName'),
             languages: session.get('languages')
         };
     },
@@ -66,7 +66,7 @@ var View = Marionette.LayoutView.extend({
     },
 
     onLanguageChange: function(e) {
-        localStorage.setItem('userLanguage_'+appConfig.baseUrl, $(e.currentTarget).val());
+        localStorage.setItem('userLanguage', $(e.currentTarget).val());
         window.location.reload(true);
     }
 });

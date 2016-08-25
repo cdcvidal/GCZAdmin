@@ -6,27 +6,24 @@ var i18n = require('i18next-client');
 var appConfig = require('./config');
 var _ = require('lodash');
 var moment = require('moment');
-
-/* jshint ignore:start */
-var lock = new Auth0Lock('LLIeCazHTJS8odUmdhrG2enWwPinrj51', 'humm-server.eu.auth0.com');
-/* jshint ignore:end */
+var User = require('../user/user.model');
 
 
 var Session = Backbone.Model.extend({
 
   opened: false,
 
-  open: function() {
+  open: function(profile, token) {
     var self = this;
-    this.setData();
     this.opened = true;
+    this.set('token', token);
+    localStorage.setItem('auth0Token', token);
     self.trigger('open');
-
 
     $.ajaxSetup({
       beforeSend: function(xhr) {
-        if (localStorage.getItem('auth0_token_' + appConfig.baseUrl)) {
-          xhr.setRequestHeader('Authorization', 'bearer ' + localStorage.getItem('auth0_token_' + appConfig.baseUrl));
+        if (token) {
+          xhr.setRequestHeader('Authorization', 'bearer ' + token);
         } else {
           xhr.setRequestHeader('Authorization', '');
         }
@@ -36,16 +33,12 @@ var Session = Backbone.Model.extend({
       }
     });
 
-    var dfd = $.Deferred();
-
-    dfd.resolve();
-    
-    return dfd.promise();
+    self.set('user', new User(profile));
   },
 
   checkTokenValidity: function(redirect) {
     var Router = require('../routing/router');
-    var token = localStorage.getItem('auth0_token_' + appConfig.baseUrl);
+    var token = localStorage.getItem('auth0Token');
     if (token !== null) {
       //atob won't be supported by IE<10
       var jwt_body = JSON.parse(atob(token.split('.')[1]));
@@ -64,42 +57,11 @@ var Session = Backbone.Model.extend({
     }
   },
 
-  updateProfile: function(token) {
-    var self = this;
-    var dfd = $.Deferred();
-
-    /* jshint ignore:start */
-    lock.getProfile(token, function(err, profile) {
-      localStorage.setItem('userEmail_' + appConfig.baseUrl, profile.email);
-      if (profile.app_metadata) {
-        localStorage.setItem('clusterName_' + appConfig.baseUrl, profile.app_metadata.cluster_name);
-        localStorage.setItem('clusterId_' + appConfig.baseUrl, profile.app_metadata.msid);
-      }
-      if (profile.user_metadata) {
-        localStorage.setItem('userName_' + appConfig.baseUrl, profile.user_metadata.name);
-      }
-      $.when(self.open()).then(function() {
-        dfd.resolve();
-      });
-    });
-
-    /* jshint ignore:end */
-    return dfd.promise();
-  },
-
-  setData: function() {
-    this.set('fullname', localStorage.getItem('userName_' + appConfig.baseUrl));
-  },
-
   close: function() {
     this.opened = false;
     this.clear();
-    localStorage.removeItem('userName_' + appConfig.baseUrl);
-    localStorage.removeItem('auth0_token_' + appConfig.baseUrl);
-    localStorage.removeItem('userLanguage_' + appConfig.baseUrl);
-    localStorage.removeItem('clusterName_' + appConfig.baseUrl);
-    localStorage.removeItem('clusterId_' + appConfig.baseUrl);
-    localStorage.removeItem('userEmail_' + appConfig.baseUrl);
+    localStorage.removeItem('auth0Token');
+    localStorage.removeItem('userLanguage');
     this.trigger('close');
   }
 });
