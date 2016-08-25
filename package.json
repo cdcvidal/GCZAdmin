@@ -10,8 +10,7 @@
     "css_browser_selector": "./vendor/css_browser_selector.js",
     "bootstrap": "./node_modules/bootstrap/dist/js/bootstrap.js",
     "bootstrap-dialog": "./vendor/bootstrap-dialog/js/bootstrap-dialog.js",
-    "eonasdan-datetimepicker": "./vendor/eonasdan-datetimepicker/js/bootstrap-datetimepicker.js",
-    "swiper": "./node_modules/swiper/dist/js/swiper.min.js"
+    "eonasdan-datetimepicker": "./vendor/eonasdan-datetimepicker/js/bootstrap-datetimepicker.js"
   },
   "browserify": {
     "transform": [
@@ -21,8 +20,7 @@
   "browserify-shim": {
     "jquery-ns": {
       "depends": [
-        "jquery:jQuery",
-        "swiper:Swiper"
+        "jquery:jQuery"
       ]
     },
     "lodash-ns": {
@@ -75,8 +73,6 @@
     "backbone": "1.2.3",
     "backbone.marionette": "^2.4.5",
     "backbone.paginator": "2.0.2",
-    "backgrid": "^0.3.5",
-    "backgrid-paginator": "^0.3.7",
     "bootstrap": "^3.3.5",
     "bootstrap-slider": "^5.0.12",
     "bootstrap-switch": "^3.3.2",
@@ -88,7 +84,6 @@
     "lodash": "^3.10.0",
     "moment": "^2.13.0",
     "numeral": "^1.5.3",
-    "sweetalert": "^1.1.3",
-    "swiper": "^3.1.7"
+    "sweetalert": "^1.1.3"
   }
 }
