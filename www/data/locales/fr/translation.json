@@ -1,0 +1,176 @@
+{
+    "grid": {
+        "startDate" : "A partir du",
+        "lastDate" :  "Jusqu'au",
+        "invalidDateRange" :  "La date initiale doit être<br />< ou = à la date finale",
+        "apply": "Appliquer",
+        "clear": "Désactiver",
+        "equals": "Égal",
+        "notEqual": "Différent",
+        "lessThan": "Inférieur",
+        "greaterThan": "Supérieur",
+        "contains": "Contient",
+        "startsWith": "Commence par",
+        "endsWith": "Fini par",
+        "greaterThanOrEqual": "Supérieur ou égal",
+        "lessThanOrEqual": "Inférieur ou égal",
+        "filterOoo": "Filtres...",
+        "filter": "Filtre",
+        "buttons": {
+          "filter": "Filtrer",
+          "sort": "Trier",
+          "reload": "Rafraichir"
+        },
+        "devices":{
+            "columns":{
+                "id" : "Device ID",
+                "sidfox_id" : "Sigfox ID",
+                "cluster": "Cluster",
+                "device_type": "Device type" 
+            }
+        }
+    },
+    "swal": {
+        "title": "Êtes-vous sûr?",
+        "text": "Vos changements ne seront pas sauvegardés.",
+        "cancelButtonText": "Sauvegarder et quitter",
+        "confirmButtonText": "Quitter sans sauvegarder"
+    },
+    "common": {
+        "ok": "Ok",
+        "validate": "Valider",
+        "connection": "Connexion",
+        "cancel": "Annuler",
+        "no_values": "Pas de valeurs à afficher",
+        "alert_success": "Succès !",
+        "alert_problem": "Oups..."
+    },
+    "date_format": {
+        "short": "DD-MM-YYYY",
+        "filename": "DD-MM-YYYY"
+    },
+    "API": {
+        "fetchFailed": "Le chargement de données depuis le serveur a échoué. Merci de rafraîchir la page et de contacter un administrateur si le problème persiste.",
+        "networkProblem": "Réseau ou serveur indisponible",
+        "wrongCredentials": "Nom d'utilisateur ou mot de passe incorrect",
+        "forbidden": "Accès non autorisé"
+    },
+    "geoloc": {
+        "unavailable": "Le service de géolocalisation n'est pas disponible"
+    },
+    "sidenav": {
+        "title": "Administration",
+        "manage_drivers": "Administrer les drivers",
+        "manage_clusters": "Administrer les clusters",
+        "manage_devices": "Administrer les devices",
+        "manage_users": "Administrer les utilisateurs",
+        "alert_management": "Administration des alertes",
+        "manage_subcluster": "Administrer les subclusters",
+        "greeting": "__username__",
+        "logout": "Se déconnecter",
+        "language": "Langue"
+    },
+    "pages": {
+        "login": {
+            "forgot": "Mot de passe oublié ?",
+            "form_rows": {
+                "login": {
+                    "label": "Nom d'utilisateur"
+                },
+                "password": {
+                    "label": "Mot de passe"
+                },
+                "persistent": {
+                    "label": "Garder ma session ouverte"
+                }
+            },
+            "submit": "$t(common.connection)"
+        },
+        "device_map": {
+            "popup_link": "Voir les mesures"
+        },
+        "device_values": {
+            "charts": {
+                "zoom_helper_touch": "Pinch pour zoomer",
+                "zoom_helper_notouch": "Cliquer et déplacer pour zoomer"
+            }
+        },
+        "device_registration": {
+            "title": "Enregistrer un device",
+            "form_rows": {
+                "code": {
+                    "label": "Identifiant du matériel",
+                    "help": "Sans tirets ni espaces",
+                    "missing": "Identifiant manquant",
+                    "invalid": "Cet identifiant n'est pas accepté par le serveur"
+                }
+            },
+            "submit": "Vérification"
+        },
+        "device_settings": {
+            "title": "Paramètres",
+            "id": "ID",
+            "cancel": "$t(common.cancel)",
+            "form_invalid": "Merci de corriger les erreurs avant de continuer",
+            "form_accepted": "Les données ont bien été enregistrées",
+            "form_rejected": "Les données n'ont pas pu être enregistrées. Merci de réessayer et contacter un administrateur de l'application si le problème persiste.",
+            "form_rows": {
+                "device_name": {
+                    "label": "Nom",
+                    "validation": "Le nom est obligatoire"
+                },
+                "alert": {
+                    "label": "Alerte"
+                },
+                "open_data": {
+                    "label": "Open Data"
+                },
+                "alert_type": {
+                    "label": "Type d'alerte",
+                    "choices": {
+                        "email": "Email",
+                        "sms": "SMS"
+                    }
+                },
+                "frequency": {
+                    "label": "Fréquence",
+                    "choices": {
+                        "every_minute": "Toutes les minutes (1440 fois par jour)",
+                        "every_five_minutes": "Toutes les 5 minutes (288 fois par jour)",
+                        "every_ten_minutes": "Toutes les 10 minutes (144 fois par jour)",
+                        "four_times_an_hour": "Tous les 15 minutes (96 fois par jour)",
+                        "twice_an_hour": "Toutes les 30 minutes (48 fois par jour)",
+                        "every_hour": "Toutes les heures (24 fois par jour)",
+                        "every_two_hours": "Toutes les 2 heures (12 fois par jour)",
+                        "every_three_hours": "Toutes les 3 heures (8 fois par jour)",
+                        "four_times_a_day": "Toutes les 6 heures (4 fois par jour)",
+                        "twice_a_day": "2 fois par jour",
+                        "once_a_day": "1 fois par jour"
+                    }
+                },
+                "position": {
+                    "label": "Position",
+                    "title": "Ma position courante",
+                    "validation1": "La latitude ou la longitude manque",
+                    "validation2": "La latitude est un nombre entre -90 et 90, la longitude est un nombre entre -180 et 180",
+                    "latitude": {
+                        "label": "Lat."
+                    },
+                    "longitude": {
+                        "label": "Long."
+                    }
+                },
+                "sensors": {
+                    "label": "Sensors",
+                    "validation": "Un seuil doit être un nombre",
+                    "alert_min": {
+                        "label": "Seuil d'alert min."
+                    },
+                    "alert_max": {
+                        "label": "Seuil d'alert max."
+                    }
+                }
+            }
+        }
+    }
+}

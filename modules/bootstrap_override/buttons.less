@@ -1,0 +1,37 @@
+.btn-link {
+  font-weight: @btn-font-weight;
+}
+
+html.notouch {
+  .btn-default {
+    .button-variant-notouch(@btn-default-color; @btn-default-bg; @btn-default-border);
+  }
+  .btn-primary {
+    .button-variant-notouch(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
+  }
+  // Success appears as green
+  .btn-success {
+    .button-variant-notouch(@btn-success-color; @btn-success-bg; @btn-success-border);
+  }
+  // Info appears as blue-green
+  .btn-info {
+    .button-variant-notouch(@btn-info-color; @btn-info-bg; @btn-info-border);
+  }
+  // Warning appears as orange
+  .btn-warning {
+    .button-variant-notouch(@btn-warning-color; @btn-warning-bg; @btn-warning-border);
+  }
+  // Danger and error appear as red
+  .btn-danger {
+    .button-variant-notouch(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
+  }
+  // Filter appear as lighten red
+  .btn-filter {
+    .button-variant-notouch(@btn-filter-color; @btn-filter-bg; @btn-filter-border);
+  }
+}
+
+// Filter appear as lighten red
+.btn-filter {
+  .button-variant(@btn-filter-color; @btn-filter-bg; @btn-filter-border);
+}

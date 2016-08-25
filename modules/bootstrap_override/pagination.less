@@ -1,0 +1,18 @@
+html.notouch {
+  .pagination {
+    > :not(.disabled) > a,
+    > :not(.disabled) > span {
+      &:hover, &:focus {
+        border-color: tint(@brand-primary, 50%);
+        background-color: tint(@brand-primary, 50%);
+      }
+    }
+    > .active > a,
+    > .active > span {
+      &:hover, &:focus {
+        background-color: @pagination-active-bg;
+        border-color: @pagination-active-border;
+      }
+    }
+  }
+}

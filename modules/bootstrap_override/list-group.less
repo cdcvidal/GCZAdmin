@@ -1,0 +1,24 @@
+.list-group {
+  margin-bottom: 0;
+}
+
+.list-group-item {
+  color: @gray-darker;
+  background-color: #FFF;
+  border-color: @gray;
+  &.is-header {
+    font-weight: bold;
+    background-color: @gray;
+  }
+}
+
+.list-group {
+  &.alternate {
+    .list-group-item {
+    	background-color: @gray-lighter;
+      &:nth-child(even) {
+        background-color: @gray-light;
+      }
+    }
+  }
+}

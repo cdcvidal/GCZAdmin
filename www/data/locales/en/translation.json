@@ -1,0 +1,168 @@
+{    "grid": {
+        "startDate" : "Start from",
+        "lastDate" :  "Until",
+        "invalidDateRange" :  "Initial date must be<br />< or = to final date",
+        "apply": "Apply filter",
+        "clear": "Clear filter",
+        "equals": "Equal",
+        "notEqual": "Not equal",
+        "lessThan": "Less than",
+        "greaterThan": "Greater than",
+        "contains": "Contains",
+        "startsWith": "Starts with",
+        "endsWith": "Ends with",
+        "greaterThanOrEqual": "Greater than or equal",
+        "lessThanOrEqual": "Less than or equal",
+        "filterOoo": "Filters...",
+        "filter": "Filter",
+        "buttons": {
+          "filter": "Filter",
+          "sort": "Sort",
+          "reload": "Reload"
+        },
+        "devices":{
+            "columns":{
+                "id" : "Device ID",
+                "sidfox_id" : "Sigfox ID",
+                "cluster": "Cluster",
+                "device_type": "Device type" 
+            }
+        }
+    },
+    "common": {
+        "ok": "Ok",
+        "validate": "Validate",
+        "connection": "Connection",
+        "cancel": "Cancel",
+        "no_values": "No values to display",
+        "alert_success": "Success!",
+        "alert_problem": "Ooops..."
+    },
+    "date_format": {
+        "short": "YYYY-MM-DD",
+        "filename": "YYYY-MM-DD"
+    },
+    "API": {
+        "fetchFailed": "We were unable to load data from the server. Please try to refresh the page and contact an administrator if the problem persists.",
+        "networkProblem": "Network or server is not available",
+        "wrongCredentials": "Wrong login or password",
+        "forbidden": "Access forbidden"
+    },
+    "geoloc": {
+        "unavailable": "Geolocation service is not available"
+    },
+    "sidenav": {
+        "manage_drivers": "Manage drivers",
+        "manage_clusters": "Manageclusters",
+        "manage_devices": "Manage devices",
+        "manage_users": "Manage users",
+        "alert_management": "Alert management",
+        "manage_subcluster": "Manage subclusters",       
+        "greeting": "__username__",
+        "logout": "Logout",
+        "language": "Language"
+    },
+    "pages": {
+        "login": {
+            "forgot": "Forgot your password ?",
+            "form_rows": {
+                "login": {
+                    "label": "Login"
+                },
+                "password": {
+                    "label": "Password"
+                },
+                "persistent": {
+                    "label": "Remember me"
+                }
+            },
+            "submit": "$t(common.connection)"
+        },
+        "device_map": {
+            "popup_link": "View measures"
+        },
+        "device_values": {
+            "charts": {
+                "zoom_helper_touch": "Pinch the chart to zoom in",
+                "zoom_helper_notouch": "Click and drag in the plot area to zoom in"
+            }
+        },
+        "device_registration": {
+            "title": "Register a device",
+            "form_rows": {
+                "code": {
+                    "label": "Device ID",
+                    "help": "Neither dash nor blanks",
+                    "missing": "ID is missing",
+                    "invalid": "This ID is not accepted by the server"
+                }
+            },
+            "submit": "Activation check"
+        },
+        "device_settings": {
+            "title": "Parameters",
+            "id": "ID",
+            "cancel": "$t(common.cancel)",
+            "form_invalid": "Please correct errors before proceeding",
+            "form_accepted": "Data were saved successfully",
+            "form_rejected": "Data could not be saved. Please retry and contact an administrator if problem persists.",
+            "form_rows": {
+                "device_name": {
+                    "label": "Name",
+                    "validation": "Name is mandatory"
+                },
+                "alert": {
+                    "label": "Alert"
+                },
+                "open_data": {
+                    "label": "Open Data"
+                },
+                "alert_type": {
+                    "label": "Alert Type",
+                    "choices": {
+                        "email": "Email",
+                        "sms": "SMS"
+                    }
+                },
+                "frequency": {
+                    "label": "Frequency",
+                    "choices": {
+                        "every_minute": "Every minute (1440 times a day)",
+                        "every_five_minutes": "Every 5 minutes (288 times a day)",
+                        "every_ten_minutes": "Every 10 minutes (144 times a day)",
+                        "four_times_an_hour": "Every 15 minutes (96 times a day)",
+                        "twice_an_hour": "Twice an hour (48 times a day)",
+                        "every_hour": "Every hour (24 times a day)",
+                        "every_two_hours": "Every 2 hours (12 times a day)",
+                        "every_three_hours": "Every 3 hours (8 times a day)",
+                        "four_times_a_day": "Every 6 hours (4 times a day)",
+                        "twice_a_day": "Twice a day",
+                        "once_a_day": "Once a day"
+                    }
+                },
+                "position": {
+                    "label": "Position",
+                    "title": "My current position",
+                    "validation1": "Latitude or longitude is missing",
+                    "validation2": "Latitude is a number between -90 and 90, longitude is a number between -180 and 180",
+                    "latitude": {
+                        "label": "Lat."
+                    },
+                    "longitude": {
+                        "label": "Long."
+                    }
+                },
+                "sensors": {
+                    "label": "Sensors",
+                    "validation": "A threshold must be a number",
+                    "alert_min": {
+                        "label": "Alert threshold min."
+                    },
+                    "alert_max": {
+                        "label": "Alert threshold max."
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,59 @@
+.header-app {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  min-height: @header-height;
+  z-index: 2;
+  background: @gray-darker;
+  color: #FFF;
+  /*.box-shadow(0 0 6px rgba(0, 0, 0, 0.5));*/
+  .btn {
+    border: none;
+    color: #FFF;
+  }
+  .title {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+    &:extend(.btn-lg);
+    > span {
+      font-weight: 300;
+      &:after {
+        content: "|";
+        font-weight: 300;
+        display: inline-block;
+        margin: 0 3px 0 7px;
+      }
+    }
+  }
+  .col-side {
+    position: relative;
+    z-index: 1;
+  }
+  @media (min-width: @screen-sm-min) {
+    left: 30%;
+    background: @gray-lighter;
+    color: @brand-primary;
+    .btn {
+      color: @brand-primary;
+    }
+    .btn {
+      &.btn_menu {
+        display: none;
+      }
+    }
+    .title {
+      text-align: left;
+      position: static;
+      width: auto;
+    }
+  }
+  @media (min-width: @screen-md-min) {
+    left: 25%;
+  }
+  @media (min-width: @screen-lg-min) {
+    left: 20%;
+  }
+}

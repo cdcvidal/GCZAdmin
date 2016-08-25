@@ -1,0 +1,195 @@
+.sidenav {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 20;
+  color: @gray-lighter;
+  font-size: 1rem;
+  visibility: hidden;
+  .transition(visibility 0s linear 0.3s);
+  a {
+    color: @gray-lighter;
+    text-align: left;
+    display: block;
+    &:hover {
+      color: @gray-lighter;
+    }
+    > span {
+      color: @gray-lighter;
+    }
+  }
+  > .inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    > .col {
+      position: absolute;
+      height: 100%;
+      right: 0;
+      top: 0;
+      background: @gray-darker;
+      box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, .5);
+      .transition-transform(.3s ease-out);
+      .translate(100%, 0);
+    }
+  }
+  .logo {
+    text-align: center;
+    padding: 18px;
+    @media (min-width: @screen-md-min) {
+      padding: 20px;
+    }
+    img {
+      height: 25px;
+      width: auto;
+    }
+  }
+  .title {
+    padding-left: 16px;
+  }
+  .nav {
+    ul {
+      margin: 0;
+      li {
+        border-left: 4px solid transparent;
+        &.active {
+          border-left-color: @brand-primary;
+          background: @gray-base;
+          > a {
+            color: #FFF;
+          }
+        }
+      }
+      &.device-registration {
+        margin-top: 10px
+      }
+    }
+  }
+  ul {
+    li {
+      .icon {
+        margin-right: 5px;
+      }
+      span {
+        vertical-align: middle;
+      }
+    }
+    &.profile {
+      position: absolute;
+      bottom: 0;
+      margin: 0 0 5px 10px;
+      li {
+        margin-left: 28px;
+        a {
+          padding-left: 0;
+        }
+      }
+      .usernames {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: @brand-primary;
+        margin-left: 0;
+        .icon {
+          margin-top: -2px;
+        }
+      }
+      .languages {
+        label {
+          font-size: 1.4rem;
+          margin-right: 8px;
+        }
+        select {
+          height: 24px;
+          background: rgba(255, 255, 255, .7);
+          border: transparent;
+        }
+      }
+    }
+  }
+  @media (max-width: @screen-xs-max) {
+    > .inner {
+      > .col {
+        ul {
+          &.device-registration {
+            a {
+              padding-left: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: @screen-sm-min) {
+    position: fixed;
+    width: 30%;
+    visibility: visible;
+    > .inner {
+      > .col {
+        .translate(0, 0);
+        left: 0;
+        right: auto;
+        width: 100%;
+        ul {
+          &.device-registration {
+            margin-top: 60px;
+          }
+          &.profile {
+            margin: 0 0 20px 15px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: @screen-md-min) and (orientation : landscape) {
+    > .inner {
+      > .col {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        ul {
+          &.profile {
+            position: static;
+            bottom: auto;
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: @screen-md-min) {
+    width: 25%;
+  }
+  @media (min-width: @screen-lg-min) {
+    width: 20%;
+  }
+}
+
+body.show-sidenav .sidenav {
+  visibility: visible;
+  .transition-delay(0s);
+  > .inner {
+    > .col {
+      .translate(0, 0);
+    }
+  }
+}
+
+.notouch {
+  .sidenav {
+    .nav {
+      ul {
+        li {
+          &:hover {
+            //border-left-color: @brand-primary;
+            background: @gray-base;
+            > a {
+              color: #FFF;
+            }
+          }
+        }
+      }
+    }
+  }
+}
