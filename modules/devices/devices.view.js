@@ -40,7 +40,7 @@ module.exports = Marionette.LayoutView.extend({
         var devices = new Devices();
 
         devices.fetch({
-          data: {'sort[name]': 'asc'},
+          data: 'sort[name]=asc',
           success: function(model, response, options){
             console.log('fetch devices success', response);
             var rowsThisPage = response;
