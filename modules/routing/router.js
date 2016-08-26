@@ -6,8 +6,7 @@ var session = require('../main/session');
 
 var swal = require('sweetalert');
 var i18n = require('i18next-client');
-var Main = require('../main/main.view');
-var $ = require('jquery');
+var MainView = require('../main/main.view');
 
 var Router = Marionette.AppRouter.extend({
     appRoutes: {
@@ -57,7 +56,7 @@ var Router = Marionette.AppRouter.extend({
 
     preventFormQuit: function (callback, args) {
         var self = this;
-        
+
         swal({
           title: i18n.t('swal.title', {defaultValue: 'Are you sure?'}),
           text: i18n.t('swal.text', {defaultValue: 'Your changes won\'t be saved.'}),
@@ -74,7 +73,7 @@ var Router = Marionette.AppRouter.extend({
               window.underEdition = false;
               callback.apply(self, args);
             } else {
-                var settingsView = Main.getInstance().rgMain.currentView.tabContent.currentView;
+                var settingsView = MainView.getInstance().rgMain.currentView.tabContent.currentView;
                 var dfd = settingsView.onSubmit();
                 if(dfd) {
                     dfd.done(function(){

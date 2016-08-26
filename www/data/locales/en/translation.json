@@ -25,7 +25,7 @@
                 "id" : "Device ID",
                 "sidfox_id" : "Sigfox ID",
                 "cluster": "Cluster",
-                "device_type": "Device type" 
+                "type": "Device type" 
             }
         }
     },
@@ -57,7 +57,7 @@
         "manage_devices": "Manage devices",
         "manage_users": "Manage users",
         "alert_management": "Alert management",
-        "manage_subcluster": "Manage subclusters",       
+        "manage_subcluster": "Manage subclusters",
         "greeting": "__username__",
         "logout": "Logout",
         "language": "Language"

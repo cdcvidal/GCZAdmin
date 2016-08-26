@@ -1,12 +1,11 @@
 'use strict';
 
 var Marionette = require('backbone.marionette');
-var $ = require('jquery');
 var Router = require('./router');
 var session = require('../main/session');
-var Main = require('../main/main.view');
-var Login = require('../user/login.view');
-var Devices = require('../devices/devices.view');
+var MainView = require('../main/main.view');
+var LoginView = require('../user/login.view');
+var DevicesView = require('../devices/devices.view');
 
 
 module.exports = Marionette.Object.extend({
@@ -35,7 +34,7 @@ module.exports = Marionette.Object.extend({
   },
 
   loginAction: function() {
-    Main.getInstance().rgMain.show(new Login(), {
+    MainView.getInstance().rgMain.show(new LoginView(), {
         preventDestroy: true
     });
   },
@@ -45,11 +44,9 @@ module.exports = Marionette.Object.extend({
   },
 
   devicesAction: function(){
-    var rgMain = Main.getInstance().rgMain;
-    var view = rgMain.currentView;
-    view = new Devices();
-    rgMain.show(view);
-
+    MainView.getInstance().rgMain.show(new DevicesView(), {
+        preventDestroy: true
+    });
   }
 
 });

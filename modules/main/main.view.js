@@ -17,9 +17,7 @@ var Layout = Marionette.LayoutView.extend({
     regions: {
         rgHeader: 'header',
         rgSidenav: 'aside',
-        rgMain: new MainRegion({
-            el: 'main'
-        }),
+        rgMain: 'main',
         rgFooter: 'footer'
     },
 

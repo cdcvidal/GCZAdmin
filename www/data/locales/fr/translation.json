@@ -26,7 +26,7 @@
                 "id" : "Device ID",
                 "sidfox_id" : "Sigfox ID",
                 "cluster": "Cluster",
-                "device_type": "Device type" 
+                "type": "Device type"
             }
         }
     },
