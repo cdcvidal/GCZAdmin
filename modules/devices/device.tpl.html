@@ -1,0 +1,114 @@
+<div class="inner">
+  <form class="form-horizontal">
+    <fieldset>
+      <legend class="container-fluid">
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 text"><%= i18n.t('device.id') %>: <%= data.id %></div>
+        <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2 buttons form-actions">
+          <button type="submit" class="btn btn-primary btn-fab">
+            <span class="icon material-icon">check</span>
+          </button>
+          <button type="reset" class="btn btn-link btn-reset">
+            <%= i18n.t('common.cancel') %>
+          </button>
+          <div class="loader">
+            <span class="icon material-icon">filter_tilt_shift</span>
+          </div>
+        </div>
+      </legend>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.name') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="text" class="form-control" name="name" value="<%= data.name %>" />
+        </div>
+        <span class="help-block"></span>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.deviceAlertTracking') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="checkbox" name="deviceAlertTracking" <%= data.deviceAlertTracking %> />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.openData') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="checkbox" name="openData" <%= data.openData %> />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.alertType') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <label class="radio-inline">
+            <input type="radio" name="alertType" value="email" <% if(data.alertType=='email'){ %>checked<% } %> /> <%= i18n.t('device.alertType.choices.email') %>
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="alertType" value="sms" <% if(data.alertType=='sms'){ %>checked<% } %> /> <%= i18n.t('device.alertType.choices.sms') %>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.collectionFrequency') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <!--<select class="form-control" name="collectionFrequency">
+            <option value="10" <%= data.freq10m %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
+            <option value="15" <%= data.freq15m %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
+            <option value="30" <%= data.freq30m %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
+            <option value="60" <%= data.freq1h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
+            <option value="120" <%= data.freq2h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
+            <option value="180" <%= data.freq3h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
+            <option value="360" <%= data.freq6h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
+            <option value="720" <%= data.freq12h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
+            <option value="1440" <%= data.freq24h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
+        </select>-->
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.lat') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="text" class="form-control" name="lat" value="<%= data.lat %>" />
+        </div>
+        <span class="help-block"></span>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.lng') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="text" class="form-control" name="lng" value="<%= data.lng %>" />
+        </div>
+        <span class="help-block"></span>
+      </div>
+    </fieldset>
+    <% if(data.metas.length) { %>
+    <fieldset>
+        <% data.metas.forEach(function(meta) { %>
+        <div class="form-group">
+          <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
+              <%= i18n.t('cluster.data_mapping_and_display.meta_data_'+meta.name+'.label') %>
+          </label>
+          <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+            <input type="text" class="form-control" data-id="<%= meta.name %>" name="meta_data[<%= meta.name %>]" value="<%= meta.value %>" />
+          </div>
+          <span class="help-block"></span>
+        </div>
+        <% }); %>
+    </fieldset>
+    <% } %>
+    <% data.sensors.forEach(function(s, i) { %>
+    <fieldset>
+      <legend class="container-fluid"><%= s.name %></legend>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= data.dico.form_rows.sensors.alert_min.label %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="text" class="form-control" data-id="<%= s.id %>" name="alert_min_<%= s.id %>" value="<%= s.min %>" />
+        </div>
+        <span class="help-block"></span>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= data.dico.form_rows.sensors.alert_max.label %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="text" class="form-control" data-id="<%= s.id %>" name="alert_max_<%= s.id %>" value="<%= s.max %>" />
+        </div>
+        <span class="help-block"></span>
+      </div>
+    </fieldset>
+    <% }); %>
+  </form>
+</div>

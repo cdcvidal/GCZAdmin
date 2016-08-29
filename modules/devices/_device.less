@@ -1,0 +1,141 @@
+.sweet-alert{
+  @color:#7F7F7F;
+  button.cancel{
+    background-color: #3BBCDA!important;
+    &:hover{
+      background-color: #66cbe2!important;
+    }
+  }
+  .sa-confirm-button-container{
+    button{
+      background-color: @color!important;
+      &:hover{
+        background-color: @color!important;
+      }
+    }
+  }
+  .sa-warning{
+    border-color: @color!important;
+  }
+  .sa-dot, .sa-body{
+    background-color: @color!important;
+  }
+
+  .pulseWarning, .pulseWarningIns{
+    web-kit-animation: none!important;
+    animation: none!important;
+  }
+}
+
+
+.page.device,
+.view.device {
+
+  .buttons.form-actions {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .loader {
+    text-align: right;
+  }
+  > .inner {
+    > header {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+    form {
+      @media (min-width: @screen-md-min) {
+        margin-bottom: 20px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      legend {
+        background: @gray-dark;
+        > div {
+          padding-left: 0;
+          &.text {
+            padding-top: 12px;
+          }
+          &.buttons {
+            text-align: right;
+            padding-right: 0;
+            @media (min-width: @screen-sm-min) {
+              padding-right: 5px;
+            }
+            @media (min-width: @screen-md-min) {
+              padding-right: 15px;
+            }
+            @media (min-width: @screen-lg-min) {
+              padding-right: 20px;
+            }
+            .btn {
+              text-align: center;
+              margin-left: 20px;
+              &:first-child {
+                margin-left: 0;
+              }
+              &.btn-reset {
+                padding-left: 0;
+                padding-right: 0;
+                color: @gray-light;
+              }
+            }
+          }
+        }
+      }
+      .form-group {
+        margin: 0;
+        padding-top: 6px;
+        padding-bottom: 6px;
+      }
+      .form-group-position {
+        .control-label {
+          padding-top: 0;
+          > span {
+            position: relative;
+            top: 1px;
+          }
+        }
+        .input-group {
+          width: 100%;
+          margin-bottom: 5px;
+          .input-group-addon {
+            text-align: left;
+            font-size: 0.8em;
+            padding: 6px;
+            min-width: 42px;
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    .form-actions {
+      background: @gray-dark;
+    }
+  }
+}
+
+html.notouch {
+  .page.device, .view.device {
+    > .inner {
+      form {
+        legend {
+          > div {
+            &.buttons {
+              .btn {
+                &.btn-reset {
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

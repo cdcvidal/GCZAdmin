@@ -45,6 +45,10 @@
         "alert_success": "Succès !",
         "alert_problem": "Oups..."
     },
+    "device": {
+      "id": "ID",
+      "name": "Name"
+    },
     "date_format": {
         "short": "DD-MM-YYYY",
         "filename": "DD-MM-YYYY"

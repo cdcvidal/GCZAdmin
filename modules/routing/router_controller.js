@@ -6,6 +6,8 @@ var session = require('../main/session');
 var MainView = require('../main/main.view');
 var LoginView = require('../user/login.view');
 var DevicesView = require('../devices/devices.view');
+var DeviceView = require('../devices/device.view');
+var Device = require('../devices/device.model');
 
 
 module.exports = Marionette.Object.extend({
@@ -46,6 +48,19 @@ module.exports = Marionette.Object.extend({
   devicesAction: function(){
     MainView.getInstance().rgMain.show(new DevicesView(), {
         preventDestroy: true
+    });
+  },
+
+  deviceAction: function(id){
+    var device = new Device({
+      id: id
+    });
+    device.fetch().done(function() {
+      MainView.getInstance().rgMain.show(new DeviceView({
+        model: device
+      }), {
+          preventDestroy: true
+      });
     });
   }
 
