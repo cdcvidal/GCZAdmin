@@ -84,24 +84,20 @@ var Layout = Marionette.LayoutView.extend({
         var self = this;
         var alertType = this.model.get('alertType'),
             freq = this.model.get('collectionFrequency');
-        return {
+        var data = this.model.toJSON();
+        return data;
+        /*return {
             id: this.model.id,
             name: this.model.get('name'),
             deviceAlertTracking: this.model.get('deviceAlertTracking') ? 'checked' : '',
             openData: this.model.get('openData') ? 'checked' : '',
             alertType: this.model.get('alertType'),
-            freq10m: freq === 10 ? 'selected' : '',
-            freq15m: freq === 15 ? 'selected' : '',
-            freq30m: freq === 30 ? 'selected' : '',
-            freq1h: freq === 60 ? 'selected' : '',
-            freq2h: freq === 120 ? 'selected' : '',
-            freq3h: freq === 180 ? 'selected' : '',
-            freq6h: freq === 360 ? 'selected' : '',
-            freq12h: freq === 720 ? 'selected' : '',
-            freq24h: freq === 1440 ? 'selected' : '',
+            alertTypes: this.model.get('alertTypes'),
+            collectionFrequency: this.model.get('collectionFrequency'),
+            collectionFrequencies: this.model.get('collectionFrequencies'),
             lat: this.model.get('lat'),
             lng: this.model.get('lng'),
-            metas: [],
+            meta_data: [],
             sensors: []
             /*metas: this.model.get('typeConfig').settingsSettings.meta_data.map(function(meta) {
                 return {
@@ -119,8 +115,8 @@ var Layout = Marionette.LayoutView.extend({
             }),
             dico: i18n.t('pages.device_settings', {
                 returnObjectTrees: true
-            })*/
-        };
+            })
+        };*/
     },
 
     onReset: function(e) {

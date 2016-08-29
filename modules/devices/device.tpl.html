@@ -37,28 +37,24 @@
       <div class="form-group">
         <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.alertType') %></label>
         <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <% _.forEach(data.alertTypes, function(alertType) { %>
           <label class="radio-inline">
-            <input type="radio" name="alertType" value="email" <% if(data.alertType=='email'){ %>checked<% } %> /> <%= i18n.t('device.alertType.choices.email') %>
+              <input type="radio" name="alertType" value="<%= alertType %>" <% if(data.alertType==alertType){ %>checked<% } %> />
+              <%= i18n.t('device.alertTypes.'+alertType) %>
           </label>
-          <label class="radio-inline">
-            <input type="radio" name="alertType" value="sms" <% if(data.alertType=='sms'){ %>checked<% } %> /> <%= i18n.t('device.alertType.choices.sms') %>
-          </label>
+          <% }); %>
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.collectionFrequency') %></label>
         <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
-          <!--<select class="form-control" name="collectionFrequency">
-            <option value="10" <%= data.freq10m %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
-            <option value="15" <%= data.freq15m %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
-            <option value="30" <%= data.freq30m %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
-            <option value="60" <%= data.freq1h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
-            <option value="120" <%= data.freq2h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
-            <option value="180" <%= data.freq3h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
-            <option value="360" <%= data.freq6h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
-            <option value="720" <%= data.freq12h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
-            <option value="1440" <%= data.freq24h %> ><%= i18n.t('device.collectionFrequency.choices.10') %></option>
-        </select>-->
+            <select class="form-control" name="collectionFrequency">
+            <% _.forEach(data.collectionFrequencies, function(collectionFrequency) { %>
+                <option value="<%= collectionFrequency %>" <% if(data.collectionFrequency==collectionFrequency){ %>selected<% } %> >
+                    <%= i18n.t('device.collectionFrequencies.'+collectionFrequency) %>
+                </option>
+            <% }); %>
+            </select>
         </div>
       </div>
       <div class="form-group">
@@ -76,35 +72,39 @@
         <span class="help-block"></span>
       </div>
     </fieldset>
-    <% if(data.metas.length) { %>
+    <% if(!_.isEmpty(data.meta_data)) { %>
     <fieldset>
-        <% data.metas.forEach(function(meta) { %>
+        <% _.forEach(data.meta_data, function(metaValue, metaName) { %>
         <div class="form-group">
           <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
-              <%= i18n.t('cluster.data_mapping_and_display.meta_data_'+meta.name+'.label') %>
+              <%= i18n.t('device.meta_datas.'+metaName, {defaultValue: metaName}) %>
           </label>
           <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
-            <input type="text" class="form-control" data-id="<%= meta.name %>" name="meta_data[<%= meta.name %>]" value="<%= meta.value %>" />
+            <input type="text" class="form-control" name="meta_data[<%= metaName %>]" value="<%= metaValue %>" />
           </div>
           <span class="help-block"></span>
         </div>
         <% }); %>
     </fieldset>
     <% } %>
-    <% data.sensors.forEach(function(s, i) { %>
+    <% data.sensors.forEach(function(sensor) { %>
     <fieldset>
-      <legend class="container-fluid"><%= s.name %></legend>
+      <legend class="container-fluid"><%= sensor.name %></legend>
       <div class="form-group">
-        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= data.dico.form_rows.sensors.alert_min.label %></label>
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
+            <%= i18n.t('device.sensors.currentAlertThresholdMin') %>
+        </label>
         <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
-          <input type="text" class="form-control" data-id="<%= s.id %>" name="alert_min_<%= s.id %>" value="<%= s.min %>" />
+          <input type="text" class="form-control" name="currentAlertThresholdMin[<%= sensor.name %>]" value="<%= sensor.currentAlertThresholdMin %>" />
         </div>
         <span class="help-block"></span>
       </div>
       <div class="form-group">
-        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= data.dico.form_rows.sensors.alert_max.label %></label>
+          <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
+              <%= i18n.t('device.sensors.currentAlertThresholdMax') %>
+          </label>
         <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
-          <input type="text" class="form-control" data-id="<%= s.id %>" name="alert_max_<%= s.id %>" value="<%= s.max %>" />
+          <input type="text" class="form-control" name="currentAlertThresholdMax[<%= sensor.name %>]" value="<%= sensor.currentAlertThresholdMax %>" />
         </div>
         <span class="help-block"></span>
       </div>
