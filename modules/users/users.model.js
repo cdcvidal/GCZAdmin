@@ -4,7 +4,7 @@ var appConfig = require('../main/config');
 
 var Model = Backbone.Model.extend({
     defaults: {
-      name: 'devices',
+      name: 'clusters',
       sortModel: {
         colId: 'name',
         sort: 'asc'
@@ -16,21 +16,12 @@ var Model = Backbone.Model.extend({
         field: 'id',
         type: 'text'
       }, {
-        field: 'type',
+        field: 'clientName',
         type: 'text'
-      }, {
-        field: 'last_value_timestamp',
-        type: 'date'
-      }, {
-        field: 'lat',
-        type: 'number'
-      }, {
-        field: 'lng',
-        type: 'number'
       }]
     },
 
-    url: appConfig.apiBaseURL + '/devices'
+    url: appConfig.apiBaseURL + '/clusters'
 });
 
 module.exports = Model;

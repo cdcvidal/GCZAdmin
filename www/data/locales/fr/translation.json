@@ -30,6 +30,11 @@
             }
         }
     },
+    "form": {
+      "invalid": "Merci de corriger les erreurs avant de continuer",
+      "success": "Les données ont bien été enregistrées",
+      "error": "Les données n'ont pas pu être enregistrées. Merci de réessayer et contacter un administrateur de l'application si le problème persiste."
+    },
     "swal": {
         "title": "Êtes-vous sûr?",
         "text": "Vos changements ne seront pas sauvegardés.",

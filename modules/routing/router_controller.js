@@ -5,9 +5,12 @@ var Router = require('./router');
 var session = require('../main/session');
 var MainView = require('../main/main.view');
 var LoginView = require('../user/login.view');
-var DevicesView = require('../devices/devices.view');
-var DeviceView = require('../devices/device.view');
+var GridView = require('../dataviz/grid.view');
+var FormView = require('../dataviz/form.view');
+var Devices = require('../devices/devices.model');
 var Device = require('../devices/device.model');
+var Clusters = require('../clusters/clusters.model');
+var Cluster = require('../clusters/cluster.model');
 
 
 module.exports = Marionette.Object.extend({
@@ -36,32 +39,38 @@ module.exports = Marionette.Object.extend({
   },
 
   loginAction: function() {
-    MainView.getInstance().rgMain.show(new LoginView(), {
-        preventDestroy: true
-    });
+    MainView.getInstance().rgMain.show(new LoginView());
   },
 
-  clustersAction: function(){
-    console.log('clustersAction');
+  clustersAction: function() {
+    MainView.getInstance().rgMain.show(new GridView({
+      model: new Clusters()
+    }));
   },
 
-  devicesAction: function(){
-    MainView.getInstance().rgMain.show(new DevicesView(), {
-        preventDestroy: true
-    });
+  clusterAction: function(id) {
+    MainView.getInstance().rgMain.show(new FormView({
+      template: require('../clusters/cluster.form.tpl.html'),
+      model: new Cluster({
+        id: id
+      })
+    }));
   },
 
-  deviceAction: function(id){
+  devicesAction: function() {
+    MainView.getInstance().rgMain.show(new GridView({
+      model: new Devices()
+    }));
+  },
+
+  deviceAction: function(id) {
     var device = new Device({
       id: id
     });
-    device.fetch().done(function() {
-      MainView.getInstance().rgMain.show(new DeviceView({
-        model: device
-      }), {
-          preventDestroy: true
-      });
-    });
+    MainView.getInstance().rgMain.show(new FormView({
+      template: require('../devices/device.form.tpl.html'),
+      model: device
+    }));
   }
 
 });

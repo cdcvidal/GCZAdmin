@@ -17,7 +17,7 @@ var LINE_SEPARATOR = '\r\n';
 
 var Layout = Marionette.LayoutView.extend({
   template: require('./grid.tpl.html'),
-  className: 'grid-view',
+  className: 'page devices margin-md',
 
   initialize: function(options) {
     var self = this;

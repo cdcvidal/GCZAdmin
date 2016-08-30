@@ -15,8 +15,13 @@ var Router = Marionette.AppRouter.extend({
         'logout': 'logoutAction',
 
         'clusters': 'clustersAction',
+        'clusters/new': 'clusterAction',
+        'clusters/:id': 'clusterAction',
+
         'devices': 'devicesAction',
+        'devices/new': 'deviceAction',
         'devices/:id': 'deviceAction',
+
         '*notFound' : 'indexAction'
 
     },
