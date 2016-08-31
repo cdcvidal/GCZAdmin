@@ -2,6 +2,6 @@
 
 module.exports = {
     env: 'dev',
-    apiBaseURL: 'https://humm-server-preprod.eu-gb.mybluemix.net/api',
+    apiBaseURL: 'http://localhost:3000/api',
     baseUrl: window.location.host,
 };

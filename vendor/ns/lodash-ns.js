@@ -44,7 +44,7 @@ _.mixin({trim: function(input) {
     if ( !input )
         return '';
     if ( _.isString(input) )
-        return input.replace(/^\s+|\s+$/g, ''); 
+        return input.replace(/^\s+|\s+$/g, '');
     else if ( _.isArray(input) )
         return _.map(input, function(str) {
             return str.replace(/^\s+|\s+$/g, '');
@@ -82,7 +82,7 @@ _.mixin({unserialize: function(params) {
 
     if (! params || ! paramTest.test(params) )
         return {};
-    
+
     var data = {},
         pairs = params.split('&'),
         lastPart,
@@ -95,7 +95,7 @@ _.mixin({unserialize: function(params) {
         if(pair.length != 2)
             pair = [pair[0], pair.slice(1).join("=")]
 
-        var key = decodeURIComponent(pair[0].replace(plus, " ")), 
+        var key = decodeURIComponent(pair[0].replace(plus, " ")),
             value = decodeURIComponent(pair[1].replace(plus, " ")),
             parts = key.match(keyBreaker);
 
@@ -159,7 +159,7 @@ _.mixin({urlObject: function(options) {
             'unescape': true,
             'convert_num': true
         };
- 
+
     if (typeof options !== "object") {
         options = default_options;
     } else {
@@ -171,15 +171,15 @@ _.mixin({urlObject: function(options) {
             }
         }
     }
- 
+
     a.href = options.url;
     url_query = a.search.substring(1);
     url_search_arr = url_query.split('&');
- 
+
     if (url_search_arr[0].length > 1) {
         for (i = 0; i < url_search_arr.length; i += 1) {
             get_param = url_search_arr[i].split("=");
- 
+
             if (options.unescape) {
                 key = decodeURI(get_param[0]);
                 val = decodeURI(get_param[1]);
@@ -187,7 +187,7 @@ _.mixin({urlObject: function(options) {
                 key = get_param[0];
                 val = get_param[1];
             }
- 
+
             if (options.convert_num) {
                 if (val.match(/^\d+$/)) {
                     val = parseInt(val, 10);
@@ -195,7 +195,7 @@ _.mixin({urlObject: function(options) {
                     val = parseFloat(val);
                 }
             }
- 
+
             if (url_get_params[key] === undefined) {
                 url_get_params[key] = val;
             } else if (typeof url_get_params[key] === "string") {
@@ -203,7 +203,7 @@ _.mixin({urlObject: function(options) {
             } else {
                 url_get_params[key].push(val);
             }
- 
+
             get_param = [];
         }
     }
@@ -219,7 +219,7 @@ _.mixin({urlObject: function(options) {
         search: a.search,
         parameters: url_get_params
     };
- 
+
     return urlObj;
 }});
 
@@ -229,7 +229,7 @@ _.mixin({dateFormat: function(date, format){
     Date.longMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     Date.shortDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     Date.longDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    
+
     // defining patterns
     var replaceChars = {
         // Day
@@ -242,7 +242,7 @@ _.mixin({dateFormat: function(date, format){
         w: function() { return date.getDay(); },
         z: function() { var d = new Date(date.getFullYear(),0,1); return Math.ceil((date - d) / 86400000); }, // Fixed now
         // Week
-        W: function() { 
+        W: function() {
             var target = new Date(date.valueOf());
             var dayNr = (date.getDay() + 6) % 7;
             target.setDate(target.getDate() - dayNr + 3);
@@ -283,7 +283,7 @@ _.mixin({dateFormat: function(date, format){
                 for (var i = 0; i < 12; ++i) {
                         var d = new Date(date.getFullYear(), i, 1);
                         var offset = d.getTimezoneOffset();
-    
+
                         if (DST === null) DST = offset;
                         else if (offset < DST) { DST = offset; break; }                     else if (offset > DST) break;
                 }
@@ -304,4 +304,3 @@ _.mixin({dateFormat: function(date, format){
         return (esc === '' && replaceChars[chr]) ? replaceChars[chr].call(date) : chr;
     });
 }})
-

@@ -313,6 +313,7 @@ html.ios-9.iphone.landscape {
 
 .generate-theme(primary; @brand-primary; #FFF);
 .generate-theme(danger; @brand-danger; #FFF);
+.generate-theme(white-primary; #FFF; @brand-primary);
 
 .page {
   opacity: 1;
@@ -500,12 +501,24 @@ form {
   }
 }
 
+.pos-relative {
+  position: relative;;
+}
+
+.margin-bottom-small {
+  margin-bottom: 5px;
+}
+
 .floating {
   position: absolute;
 }
 
 .floating-top {
   top: 2rem;
+}
+
+.floating-top-full {
+  top: 0;
 }
 
 .floating-bottom {
@@ -522,6 +535,11 @@ form {
 
 .floating-right-full {
   right: 0;
+}
+
+.floating-right-col {
+  left: 100%;
+  margin-left: 15px;
 }
 
 .fixed {
@@ -659,4 +677,9 @@ form {
     web-kit-animation: none!important;
     animation: none!important;
   }
+}
+
+.sortable-placeholder {
+  height: 50px;
+  background: @brand-primary;
 }

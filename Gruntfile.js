@@ -5,7 +5,8 @@ module.exports = function(grunt) {
             options: {
               variables: {
                 'env': 'dev',
-                'api_base_url': 'https://humm-server-preprod.eu-gb.mybluemix.net/api',
+                //'api_base_url': 'https://humm-server-preprod.eu-gb.mybluemix.net/api',
+                'api_base_url': 'http://localhost:3000/api',
                 'cacheBuster': new Date().toJSON().replace(/-/g, '').replace(/:/g, '').replace('T', '').replace('.', '-')
               }
             }

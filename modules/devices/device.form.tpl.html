@@ -97,7 +97,9 @@
     </fieldset>
     <% } %>
     <% if(!_.isEmpty(data.model.meta_data)) { %>
+    <% var sensorIdx = 0; %>
     <% _.forEach(data.model.sensors, function(sensor, sensorIndex) { %>
+    <% sensorIdx = sensorIndex; %>
     <fieldset>
       <legend class="container-fluid"><%= sensor.name %></legend>
       <div class="form-group">

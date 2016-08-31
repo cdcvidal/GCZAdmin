@@ -6,6 +6,7 @@ var i18n = require('i18next-client');
 var _ = require('lodash');
 var $ = require('jquery');
 var notify = require('../notifications/notify').notify;
+var qs = require('qs');
 
 var Layout = Marionette.LayoutView.extend({
     name: 'device_settings',
@@ -18,21 +19,27 @@ var Layout = Marionette.LayoutView.extend({
 
     initialize: function() {
       var self = this;
-      if (!this.model.isNew()) {
-        this.$el.addClass('processing');
-        this.model.fetch().done(function() {
-          self.$el.removeClass('processing');
-          self.render();
-        });
-      }
+
     },
 
     onShow: function(options) {
         var self = this;
-        this.$el.find('input[type="checkbox"]').bootstrapSwitch();
-        this.$el.find('input[type="checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
-            self.onFormChange();
-        });
+        if (!this.model.isNew()) {
+          this.$el.addClass('processing');
+          this.model.fetch().done(function() {
+            self.$el.removeClass('processing');
+            self.render();
+            self.$el.find('input[type="checkbox"]').bootstrapSwitch();
+            self.$el.find('input[type="checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+                self.onFormChange();
+            });
+            self.onReady();
+          });
+        }
+    },
+
+    onReady: function() {
+
     },
 
     onFormChange: function() {
@@ -54,9 +61,15 @@ var Layout = Marionette.LayoutView.extend({
     onSubmit: function(e) {
         var self = this;
         e.preventDefault();
+        var serialized = $(e.currentTarget).serialize();
+        var formData = qs.parse(serialized, {depth: 10});
+        console.log(formData);
+        if (true) {
+          return false;
+        }
+        var model = this.model.toJSON();
+        _.merge(model, formData);
 
-        var formData = _.unserialize($(e.currentTarget).serialize());
-        this.model.set(formData);
 
         if (!this.model.isValid()) {
           notify('warning', i18n.t('common.alert_problem'), i18n.t('form.invalid'));

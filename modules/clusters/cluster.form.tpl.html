@@ -43,5 +43,102 @@
             </select>
         </div>
       </div>
+    </fieldset>
+    <div class="js-sortable-subclusters">
+    <% if (data.model.configFile) { %>
+    <% _.forEach(data.model.configFile.navigation_items.queries, function(subcluster, subclusterIdx) { %>
+        <fieldset>
+          <legend class="container-fluid">
+              <button type="button" class="handle-subcluster btn btn-primary btn-fab btn-sm">
+                <span class="icon material-icon">swap_vertical</span>
+              </button>
+              <%= i18n.t('cluster.subcluster') %> <%= subclusterIdx+1 %>
+          </legend>
+          <% _.forEach(subcluster.label, function(label, lang) { %>
+          <div class="form-group">
+            <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
+                <%= i18n.t('cluster.subcluster.label') %> <%= lang %>
+            </label>
+            <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+              <input type="text" class="form-control" name="configFile[navigation_items][queries][<%=subclusterIdx%>][label][<%= lang %>]" value="<%= label %>" />
+            </div>
+            <span class="help-block"></span>
+          </div>
+          <% }); %>
+          <div class="form-group">
+            <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
+                <%= i18n.t('cluster.subcluster.filter') %>
+            </label>
+            <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+              <input type="text" class="form-control" name="configFile[navigation_items][queries][<%=subclusterIdx%>][filter]" value="<%= subcluster.filter %>" />
+            </div>
+            <span class="help-block"></span>
+          </div>
+          <% if (_.get(subcluster, 'container_display.display.listSettings.columns')) { %>
+          <div class="form-group">
+            <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
+                <%= i18n.t('cluster.subcluster.columns') %>
+            </label>
+            <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col js-sortable-subcluster-columns">
+            <% _.forEach(subcluster.container_display.display.listSettings.columns, function(column) { %>
+              <div class="pos-relative margin-bottom-small">
+                  <select class="form-control" name="configFile[navigation_items][queries][<%=subclusterIdx%>][container_display][display][listSettings][columns][]">
+                  <% _.forEach(data.model.configFile.data_mapping_and_display, function(field, fieldname) { %>
+                      <option value="<%= fieldname %>" <%= column != fieldname ? '' : 'selected' %> ><%= fieldname %></option>
+                  <% }); %>
+                  </select>
+                  <button type="button" class="handle-subcluster-column btn btn-primary btn-fab btn-xs floating floating-top-full floating-right-col">
+                    <span class="icon material-icon">swap_vertical</span>
+                  </button>
+              </div>
+            <% }); %>
+            </div>
+            <span class="help-block"></span>
+          </div>
+          <% } %>
+
+          <% if (_.get(subcluster, 'container_display.display.mapSettings.layers')) { %>
+          <div class="form-group">
+            <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
+                <%= i18n.t('cluster.subcluster.mapLayers') %>
+            </label>
+            <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col js-sortable-subcluster-maplayers">
+            <% _.forEach(subcluster.container_display.display.mapSettings.layers, function(layer) { %>
+              <div class="pos-relative margin-bottom-small">
+                  <select class="form-control" name="configFile[navigation_items][queries][<%=subclusterIdx%>][container_display][display][mapSettings][layers][]">
+                  <% _.forEach(data.model.configFile.data_mapping_and_display, function(field, fieldname) { %>
+                      <option value="<%= fieldname %>" <%= layer != fieldname ? '' : 'selected' %> ><%= fieldname %></option>
+                  <% }); %>
+                  </select>
+                  <button type="button" class="handle-subcluster-maplayer btn btn-primary btn-fab btn-xs floating floating-top-full floating-right-col">
+                    <span class="icon material-icon">swap_vertical</span>
+                  </button>
+              </div>
+            <% }); %>
+            </div>
+            <span class="help-block"></span>
+          </div>
+          <% } %>
+
+          <% if (_.get(subcluster, 'container_display.display.mapSettings.popup')) { %>
+          <div class="form-group">
+            <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
+                <%= i18n.t('cluster.subcluster.mapPopupTitle') %>
+            </label>
+            <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+                <select class="form-control" name="configFile[navigation_items][queries][<%=subclusterIdx%>][container_display][display][mapSettings][popup][title]">
+                <% _.forEach(data.model.configFile.data_mapping_and_display, function(field, fieldname) { %>
+                    <option value="<%= fieldname %>" <%= _.get(subcluster, 'container_display.display.mapSettings.popup.title') != fieldname ? '' : 'selected' %> ><%= fieldname %></option>
+                <% }); %>
+                </select>
+            </div>
+            <span class="help-block"></span>
+          </div>
+          <% } %>
+
+        </fieldset>
+    <% }); %>
+    <% } %>
+    </div>
   </form>
 </div>
