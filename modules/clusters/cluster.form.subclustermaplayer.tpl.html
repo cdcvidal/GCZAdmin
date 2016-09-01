@@ -1,0 +1,17 @@
+<div class="row margin-bottom-small">
+    <div class="col-xs-8 no-padding-right">
+        <select class="form-control" name="configFile[navigation_items][queries][<%=data.subclusterIdx%>][container_display][display][mapSettings][layers][]">
+        <% _.forEach(data.model.configFile.data_mapping_and_display, function(field, fieldname) { %>
+            <option value="<%= fieldname %>" <%= data.value != fieldname ? '' : 'selected' %> ><%= fieldname %></option>
+        <% }); %>
+        </select>
+    </div>
+    <div class="col-xs-4 no-padding-left text-right">
+        <button type="button" class="btn btn-link btn-sm text-danger js-btn-remove-sortable no-padding-horizontal">
+          <span class="icon material-icon">clear</span>
+        </button>
+        <button type="button" class="handle-subcluster-maplayer btn btn-link btn-sm text-primary no-padding-horizontal">
+            <span class="icon material-icon">swap_vertical</span>
+        </button>
+    </div>
+</div>

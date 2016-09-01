@@ -44,7 +44,7 @@
         </div>
       </div>
     </fieldset>
-    <div class="js-sortable-subclusters">
+    <div class="js-sortables js-sortable-subclusters">
     <% if (data.model.configFile) { %>
     <% _.forEach(data.model.configFile.navigation_items.queries, function(subcluster, subclusterIdx) { %>
         <fieldset>
@@ -79,19 +79,36 @@
             <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
                 <%= i18n.t('cluster.subcluster.columns') %>
             </label>
-            <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col js-sortable-subcluster-columns">
-            <% _.forEach(subcluster.container_display.display.listSettings.columns, function(column) { %>
-              <div class="pos-relative margin-bottom-small">
-                  <select class="form-control" name="configFile[navigation_items][queries][<%=subclusterIdx%>][container_display][display][listSettings][columns][]">
-                  <% _.forEach(data.model.configFile.data_mapping_and_display, function(field, fieldname) { %>
-                      <option value="<%= fieldname %>" <%= column != fieldname ? '' : 'selected' %> ><%= fieldname %></option>
-                  <% }); %>
-                  </select>
-                  <button type="button" class="handle-subcluster-column btn btn-primary btn-fab btn-xs floating floating-top-full floating-right-col">
-                    <span class="icon material-icon">swap_vertical</span>
-                  </button>
-              </div>
+            <div name="columns" class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col js-sortables js-sortable-subcluster-columns">
+              <% _.forEach(subcluster.container_display.display.listSettings.columns, function(column) { %>
+                  <% var rowTpl = require('./cluster.form.subclustercolumn.tpl.html'); %>
+                  <%= rowTpl({model: data.model, subclusterIdx: subclusterIdx, value:column}) %>
+              <% }); %>
+            </div>
+            <div class="col-xs-offset-5 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 col-xs-5">
+                <button type="button" class="btn btn-primary btn-xs js-btn-add-sortable">
+                  <span class="icon material-icon">add</span> Add an item
+                </button>
+            </div>
+            <span class="help-block"></span>
+          </div>
+          <% } %>
+
+          <% if (_.get(subcluster, 'container_display.display.chartSettings.charts')) { %>
+          <div class="form-group">
+            <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
+                <%= i18n.t('cluster.subcluster.charts') %>
+            </label>
+            <div name="charts" class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col js-sortables js-sortable-subcluster-charts sortable-subcluster-charts">
+            <% _.forEach(subcluster.container_display.display.chartSettings.charts, function(chart) { %>
+                <% var rowTpl = require('./cluster.form.subclusterchart.tpl.html'); %>
+                <%= rowTpl({model: data.model, subclusterIdx: subclusterIdx, value:chart}) %>
             <% }); %>
+            </div>
+            <div class="col-xs-offset-5 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 col-xs-5">
+                <button type="button" class="btn btn-primary btn-xs js-btn-add-sortable">
+                  <span class="icon material-icon">add</span> Add an item
+                </button>
             </div>
             <span class="help-block"></span>
           </div>
@@ -102,19 +119,16 @@
             <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2">
                 <%= i18n.t('cluster.subcluster.mapLayers') %>
             </label>
-            <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col js-sortable-subcluster-maplayers">
+            <div name="maplayers" class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col js-sortables js-sortable-subcluster-maplayers">
             <% _.forEach(subcluster.container_display.display.mapSettings.layers, function(layer) { %>
-              <div class="pos-relative margin-bottom-small">
-                  <select class="form-control" name="configFile[navigation_items][queries][<%=subclusterIdx%>][container_display][display][mapSettings][layers][]">
-                  <% _.forEach(data.model.configFile.data_mapping_and_display, function(field, fieldname) { %>
-                      <option value="<%= fieldname %>" <%= layer != fieldname ? '' : 'selected' %> ><%= fieldname %></option>
-                  <% }); %>
-                  </select>
-                  <button type="button" class="handle-subcluster-maplayer btn btn-primary btn-fab btn-xs floating floating-top-full floating-right-col">
-                    <span class="icon material-icon">swap_vertical</span>
-                  </button>
-              </div>
+                <% var rowTpl = require('./cluster.form.subclustermaplayer.tpl.html'); %>
+                <%= rowTpl({model: data.model, subclusterIdx: subclusterIdx, value:layer}) %>
             <% }); %>
+            </div>
+            <div class="col-xs-offset-5 col-sm-offset-4 col-md-offset-3 col-lg-offset-2 col-xs-5">
+                <button type="button" class="btn btn-primary btn-xs js-btn-add-sortable">
+                  <span class="icon material-icon">add</span> Add an item
+                </button>
             </div>
             <span class="help-block"></span>
           </div>

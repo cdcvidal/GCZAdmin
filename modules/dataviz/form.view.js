@@ -58,18 +58,28 @@ var Layout = Marionette.LayoutView.extend({
         Backbone.history.loadUrl(Backbone.history.fragment);
     },
 
+    onBeforeSubmit: function() {
+
+    },
+
     onSubmit: function(e) {
         var self = this;
         e.preventDefault();
+        this.onBeforeSubmit();
         var serialized = $(e.currentTarget).serialize();
         var formData = qs.parse(serialized, {depth: 10});
-        console.log(formData);
-        if (true) {
-          return false;
-        }
-        var model = this.model.toJSON();
-        _.merge(model, formData);
 
+        if (!this.model.isNew()) {
+          formData.id = this.model.get('id');
+        }
+        this.model.attributes = formData;
+
+        //var model = this.model.toJSON();
+        // _.merge(this.model.attributes, formData, function(a, b) {
+        //   if (_.isArray(a)) {
+        //     return b;
+        //   }
+        // });
 
         if (!this.model.isValid()) {
           notify('warning', i18n.t('common.alert_problem'), i18n.t('form.invalid'));

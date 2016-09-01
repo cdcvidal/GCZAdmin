@@ -1,0 +1,23 @@
+<div class="row margin-bottom-small <%= _.isPlainObject(data.value) ? 'advanced' : '' %>">
+    <div class="col-xs-8 no-padding-right">
+        <input type="hidden" name="configFile[navigation_items][queries][<%=data.subclusterIdx%>][container_display][display][chartSettings][charts][]" value="<%= data.value %>" />
+        <select class="form-control chart-editor-select visible-chart-simple">
+        <% _.forEach(data.model.configFile.data_mapping_and_display, function(field, fieldname) { %>
+            <option value="<%= fieldname %>" <%= data.value != fieldname ? '' : 'selected' %> ><%= fieldname %></option>
+        <% }); %>
+        </select>
+        <textarea class="form-control chart-editor-textarea visible-chart-advanced"><%= JSON.stringify(data.value, null, '  ') %></textarea>
+    </div>
+    <div class="col-xs-4 no-padding-left text-right">
+        <button type="button" class="toggle-subcluster-chart-mode btn btn-link btn-sm text-primary no-padding-horizontal">
+          <span class="icon material-icon visible-chart-simple">add</span>
+          <span class="icon material-icon visible-chart-advanced">remove</span>
+        </button>
+        <button type="button" class="btn btn-link btn-sm text-danger js-btn-remove-sortable no-padding-horizontal">
+          <span class="icon material-icon">clear</span>
+        </button>
+        <button type="button" class="handle-subcluster-chart btn btn-link btn-sm text-primary no-padding-horizontal">
+          <span class="icon material-icon">swap_vertical</span>
+        </button>
+    </div>
+</div>

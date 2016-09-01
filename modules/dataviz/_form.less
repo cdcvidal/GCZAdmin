@@ -85,6 +85,21 @@
       background: @gray-dark;
     }
   }
+
+  .sortable-subcluster-charts {
+    > .row {
+      &.advanced {
+        .visible-chart-simple {
+          display: none;
+        }
+      }
+      &:not(.advanced) {
+        .visible-chart-advanced {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 html.notouch {
