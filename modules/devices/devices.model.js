@@ -11,9 +11,15 @@ var Model = Backbone.Model.extend({
       },
       columnDefs: [{
         field: 'name',
-        type: 'text'
+        type: 'text',
+        pinned: 'left',
+        suppressSizeToFit: true,
+        width: 250
       }, {
         field: 'id',
+        type: 'text'
+      }, {
+        field: 'msid',
         type: 'text'
       }, {
         field: 'type',
@@ -27,6 +33,14 @@ var Model = Backbone.Model.extend({
       }, {
         field: 'lng',
         type: 'number'
+      }, {
+        minWidth: 0,
+        width: 50,
+        suppressSizeToFit: true,
+        pinned: 'right',
+        cellRenderer: function(params) {
+          return '<a class="btn btn-primary btn-xs" href="#devices/'+(params.data.id)+'">Edit</a>';
+        }
       }]
     },
 

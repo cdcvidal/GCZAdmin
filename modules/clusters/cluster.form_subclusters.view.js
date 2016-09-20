@@ -11,19 +11,15 @@ var bootstrap = require('bootstrap');
 var Dialog = require('bootstrap-dialog');
 
 var Layout = FormView.extend({
-    template: require('./cluster.form.tpl.html'),
+    template: require('./cluster.form_subclusters.tpl.html'),
+    className: '',
+
+    initialize: function(options) {
+      this.revisions = options.revisions;
+    },
 
     onShow: function(options) {
-        var self = this;
-        if (!this.model.isNew()) {
-          this.$el.addClass('processing');
-          this.model.fetch().done(function() {
-            self.model.loadRevisions().done(function(response) {
-              self.revisions = response;
-              self.onLoad();
-            });
-          });
-        }
+      this.onLoad();
     },
 
     onReady: function(options) {
@@ -144,11 +140,13 @@ var Layout = FormView.extend({
     },
 
     processFormData: function(formData) {
+      console.log('processFormData', this.$el.find('#subcluster-query-advanced').length);
       if (this.$el.find('#subcluster-query-advanced').hasClass('active')) {
         delete formData.configFile;
         formData.configFile = formData['configFile-advanced'];
-        delete formData['configFile-advanced'];
       }
+      delete formData['configFile-advanced'];
+
       return formData;
     }
 });

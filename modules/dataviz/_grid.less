@@ -76,6 +76,9 @@
       background: #C7C7C7;
       color: #525252;
       font-weight: 500;
+      .ag-pinned-right-header {
+          border-left: 1px solid #EEE;
+      }
       .ag-header-cell {
         line-height: 40px;
         cursor: pointer;
@@ -154,7 +157,7 @@
     }
     .ag-body {
       .ag-row {
-        cursor: pointer;
+        //cursor: pointer;
         line-height: 30px;
         transition: background-color 0.1s linear;
         background: #E5E5E5;
@@ -162,10 +165,10 @@
         &.ag-row-even {
           background: #F2F2F2;
         }
-        &:focus,
+        /*&:focus,
         &:hover {
           background: white;
-        }
+        }*/
         .ag-cell {
           padding: 0 7px;
           &:first-child {

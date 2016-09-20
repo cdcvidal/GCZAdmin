@@ -19,8 +19,21 @@
           margin-bottom: 0;
         }
       }
+      fieldset {
+        &:not(.collapsed) {
+          .visible-collapsed {
+            display: none;
+          }
+        }
+        &.collapsed {
+          .hidden-collapsed {
+            display: none;
+          }
+        }
+      }
       legend {
         background: @gray-dark;
+        border-bottom: 1px solid #D9D9D9;
         > div {
           padding-left: 0;
           &.text {
@@ -86,6 +99,10 @@
     }
   }
 
+  .nav-tabs {
+    margin-top: 15px;
+  }
+
   .sortable-subcluster-charts {
     > .row {
       &.advanced {
@@ -97,6 +114,21 @@
         .visible-chart-advanced {
           display: none;
         }
+      }
+    }
+  }
+
+  .restorable{
+    &:not(.loading) {
+      .restorable-loader {
+        display: none;
+      }
+    }
+    .loading {
+      .restorable-loader {
+        -webkit-animation: loading 2s linear 0s infinite;
+        -o-animation: loading 2s linear 0s infinite;
+        animation: loading 2s linear 0s infinite;
       }
     }
   }

@@ -16,8 +16,9 @@ var Model = Backbone.Model.extend({
         field: 'id',
         type: 'text'
       }, {
-        field: 'clientName',
-        type: 'text'
+        cellRenderer: function(params) {
+          return '<a class="btn btn-primary btn-xs" href="#clusters/'+(params.data.id)+'">Edit</a>';
+        }
       }]
     },
 

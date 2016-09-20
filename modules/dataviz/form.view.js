@@ -12,14 +12,13 @@ var Layout = Marionette.LayoutView.extend({
     name: 'device_settings',
     className: 'page scrollable model-edition',
     events: {
-        'reset form': 'onReset',
+        'reset form': 'reload',
         'submit form': 'onSubmit',
         'change textarea,input,select,checkbox': 'onFormChange'
     },
 
     initialize: function() {
       var self = this;
-
     },
 
     onShow: function(options) {
@@ -27,15 +26,20 @@ var Layout = Marionette.LayoutView.extend({
         if (!this.model.isNew()) {
           this.$el.addClass('processing');
           this.model.fetch().done(function() {
-            self.$el.removeClass('processing');
-            self.render();
-            self.$el.find('input[type="checkbox"]').bootstrapSwitch();
-            self.$el.find('input[type="checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
-                self.onFormChange();
-            });
-            self.onReady();
+            self.onLoad();
           });
         }
+    },
+
+    onLoad: function() {
+      var self = this;
+      this.$el.removeClass('processing');
+      this.render();
+      this.$el.find('input[type="checkbox"]').bootstrapSwitch();
+      this.$el.find('input[type="checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+          self.onFormChange();
+      });
+      this.onReady();
     },
 
     onReady: function() {
@@ -53,13 +57,17 @@ var Layout = Marionette.LayoutView.extend({
         };
     },
 
-    onReset: function(e) {
+    reload: function(e) {
         window.underEdition = false;
         Backbone.history.loadUrl(Backbone.history.fragment);
     },
 
     onBeforeSubmit: function() {
 
+    },
+
+    processFormData: function(formData) {
+      return formData;
     },
 
     onSubmit: function(e) {
@@ -72,6 +80,9 @@ var Layout = Marionette.LayoutView.extend({
         if (!this.model.isNew()) {
           formData.id = this.model.get('id');
         }
+
+        formData = this.processFormData(formData);
+        console.log(formData);
         this.model.attributes = formData;
 
         //var model = this.model.toJSON();

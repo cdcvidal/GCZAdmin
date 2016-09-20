@@ -26,22 +26,14 @@ var Layout = Marionette.LayoutView.extend({
     var columnDefs = this.model.get('columnDefs');
     _.forEach(columnDefs, function(col, i) {
       _.defaults(col, {
-        headerName: i18n.t('grid.'+self.model.get('name')+'.columns.'+col.field, {defaultValue: col.field}),
+        headerName: !col.field ? '' : i18n.t('grid.'+self.model.get('name')+'.columns.'+col.field, {defaultValue: col.field}),
         filter: col.type == 'number' ?  CustomNumberFilter.NumberFilter : col.type == 'date' ? CustomDateFilter.DateFilter : CustomTextFilter.TextFilter,
         filterParams: {
           apply: true,
           newRowsAction: 'keep'
         },
-        minWidth: col.type == 'date' ? 200 : 100,
-        suppressSizeToFit: col.type == 'date' ? true : false,
+        minWidth: col.type == 'date' ? 200 : 100
       });
-      if (!i) {
-        _.assign(col, {
-            pinned: 'left',
-            suppressSizeToFit: true,
-            width: col.type == 'date' ? 200 : 250
-        });
-      }
     });
 
     this.gridOptions = {
@@ -69,15 +61,6 @@ var Layout = Marionette.LayoutView.extend({
         '    <span id="agText" class="ag-header-cell-text"></span>'+
         '  </div>'+
         '</div>',
-      onRowClicked: function(row){
-        if ( !(_this.$el.find('.ag-menu').length) ){
-          if (options.onRowClicked) {
-            options.onRowClicked(row);
-          }
-        }
-
-
-      },
       localeTextFunc: function(key, defaultValue) {
           var gridKey = 'grid.' + key;
           var value = i18n.t(gridKey, {defaultValue: defaultValue});

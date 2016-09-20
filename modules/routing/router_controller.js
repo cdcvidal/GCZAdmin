@@ -12,6 +12,7 @@ var Device = require('../devices/device.model');
 var Clusters = require('../clusters/clusters.model');
 var Cluster = require('../clusters/cluster.model');
 var ClusterForm = require('../clusters/cluster.form.view');
+var ClusterForms = require('../clusters/cluster.forms.view');
 
 
 module.exports = Marionette.Object.extend({
@@ -50,7 +51,7 @@ module.exports = Marionette.Object.extend({
   },
 
   clusterAction: function(id) {
-    MainView.getInstance().rgMain.show(new ClusterForm({
+    MainView.getInstance().rgMain.show(new ClusterForms({
       model: new Cluster({
         id: id
       })

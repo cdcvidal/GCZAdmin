@@ -1,0 +1,53 @@
+<form class="form-horizontal">
+    <fieldset>
+      <legend class="container-fluid">
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 text"><%= !data.model.id ? '' : i18n.t('cluster.id') +' : '+ data.model.id %></div>
+        <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2 buttons form-actions">
+          <button type="submit" class="btn btn-primary btn-fab">
+            <span class="icon material-icon">check</span>
+          </button>
+          <button type="reset" class="btn btn-link btn-reset">
+            <%= i18n.t('common.cancel') %>
+          </button>
+          <div class="loader">
+            <span class="icon material-icon">filter_tilt_shift</span>
+          </div>
+        </div>
+      </legend>
+      <% if (!data.model.id) { %>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('cluster.id') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="text" class="form-control" name="id" />
+        </div>
+        <span class="help-block"></span>
+      </div>
+      <% } %>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('cluster.name') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="text" class="form-control" name="name" value="<%= data.model.name %>" />
+        </div>
+        <span class="help-block"></span>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('cluster.alert_emails_recipients') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+          <input type="text" class="form-control" name="alert_emails_recipients" value="<%= data.model.alert_emails_recipients %>" />
+        </div>
+        <span class="help-block"></span>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('cluster.alertLanguage') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+            <select class="form-control" name="alertLanguage">
+            <% _.forEach(data.config.alertLanguages, function(alertLanguage) { %>
+                <option value="<%= alertLanguage %>" <% if(data.model.alertLanguage==alertLanguage){ %>selected<% } %> >
+                    <%= alertLanguage %>
+                </option>
+            <% }); %>
+            </select>
+        </div>
+      </div>
+    </fieldset>
+</form>
