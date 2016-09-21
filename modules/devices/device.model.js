@@ -7,7 +7,8 @@ var Model = Backbone.Model.extend({
     urlRoot: appConfig.apiBaseURL + '/devices',
     config: {
       alertTypes: ['email', 'sms'],
-      collectionFrequencies: [10,15,30,60,120,180,360,720,1440]
+      collectionFrequencies: [10,15,30,60,120,180,360,720,1440],
+      deviceTypes: ['CATNIP', 'MAXBOTIX'],
     },
     validate: function() {
       var self = this;

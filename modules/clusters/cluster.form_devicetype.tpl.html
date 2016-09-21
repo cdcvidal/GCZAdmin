@@ -1,0 +1,44 @@
+<form class="form-horizontal">
+    <fieldset>
+      <legend class="container-fluid">
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 text"><%= !data.model.id ? '' : i18n.t('cluster.id') +' : '+ data.model.id %></div>
+        <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2 buttons form-actions">
+          <button type="submit" class="btn btn-primary btn-fab">
+            <span class="icon material-icon">check</span>
+          </button>
+          <button type="reset" class="btn btn-link btn-reset">
+            <%= i18n.t('common.cancel') %>
+          </button>
+          <div class="loader">
+            <span class="icon material-icon">filter_tilt_shift</span>
+          </div>
+        </div>
+      </legend>
+    </fieldset>
+    <fieldset class="restorable">
+        <div class="form-group">
+            <div class="col-xs-12 form-control-col">
+                <textarea class="form-control" name="deviceType"><%= JSON.stringify(data.model.deviceType, null, '  ') %></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4 col-md-3 col-lg-2">
+                <%= i18n.t('cluster.subcluster.mapPopupTitle') %>
+            </label>
+            <div class="col-sm-6 col-md-5 col-lg-4 form-control-col">
+                <select class="form-control">
+                <% _.forEach(data.revisions.deviceTypeConfig, function(deviceTypeRevision) { %>
+                    <option value="<%= deviceTypeRevision.id %>"><%= deviceTypeRevision.time %></option>
+                <% }); %>
+                </select>
+            </div>
+            <div class="col-sm-2 col-md-4 col-lg-6">
+                <button type="button" class="btn btn-sm btn-preview">Preview</button>
+                <button type="button" class="btn btn-sm btn-apply">Apply</button>
+                <span class="loader restorable-loader">
+                  <span class="icon material-icon">filter_tilt_shift</span>
+              </span>
+            </div>
+        </div>
+    </fieldset>
+</form>

@@ -7,6 +7,8 @@ var _ = require('lodash');
 var $ = require('jquery');
 var notify = require('../notifications/notify').notify;
 var qs = require('qs');
+var bootstrap = require('bootstrap');
+var Dialog = require('bootstrap-dialog');
 
 var Layout = Marionette.LayoutView.extend({
     name: 'device_settings',
@@ -18,7 +20,6 @@ var Layout = Marionette.LayoutView.extend({
     },
 
     initialize: function() {
-      var self = this;
     },
 
     onShow: function(options) {
@@ -60,6 +61,33 @@ var Layout = Marionette.LayoutView.extend({
     reload: function(e) {
         window.underEdition = false;
         Backbone.history.loadUrl(Backbone.history.fragment);
+    },
+
+    initRestorable: function(options) {
+      var self = this;
+      var $target = options.$target;
+      $target.find('.btn-preview').click(function() {
+        var revId = $target.find('select').val();
+        if (!revId) {
+          return false;
+        }
+        var $message = $('<textarea class="form-control"></textarea>');
+        var dialog = Dialog.show({
+            title: '',
+            message: $message
+        });
+        options.loadPreview(revId).done(function(response) {
+          $message.val(JSON.stringify(response, null, '  '));
+        });
+      });
+      $target.find('.btn-apply').click(function() {
+        var revId = $target.find('select').val();
+        $target.addClass('loading');
+        options.loadContent(revId).done(function(response) {
+          $target.removeClass('loading');
+          $target.find('textarea').val(JSON.stringify(response, null, '  '));
+        });
+      });
     },
 
     onBeforeSubmit: function() {

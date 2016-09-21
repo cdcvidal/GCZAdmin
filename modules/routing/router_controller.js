@@ -11,8 +11,9 @@ var Devices = require('../devices/devices.model');
 var Device = require('../devices/device.model');
 var Clusters = require('../clusters/clusters.model');
 var Cluster = require('../clusters/cluster.model');
-var ClusterForm = require('../clusters/cluster.form.view');
 var ClusterForms = require('../clusters/cluster.forms.view');
+var Drivers = require('../drivers/drivers.model');
+var DriversForm = require('../drivers/drivers.form.view');
 
 
 module.exports = Marionette.Object.extend({
@@ -42,6 +43,12 @@ module.exports = Marionette.Object.extend({
 
   loginAction: function() {
     MainView.getInstance().rgMain.show(new LoginView());
+  },
+
+  driversAction: function() {
+    MainView.getInstance().rgMain.show(new DriversForm({
+      model: new Drivers()
+    }));
   },
 
   clustersAction: function() {

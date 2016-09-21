@@ -32,6 +32,19 @@
         <span class="help-block"></span>
       </div>
       <div class="form-group">
+        <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.type') %></label>
+        <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
+            <select class="form-control" name="type">
+            <% _.forEach(data.config.deviceTypes, function(deviceType) { %>
+                <option value="<%= deviceType %>" <% if(data.model.type==deviceType){ %>selected<% } %> >
+                    <%= deviceType %>
+                </option>
+            <% }); %>
+            </select>
+        </div>
+        <span class="help-block"></span>
+      </div>
+      <div class="form-group">
         <label class="control-label col-xs-5 col-sm-4 col-md-3 col-lg-2"><%= i18n.t('device.deviceAlertTracking') %></label>
         <div class="col-xs-7 col-sm-6 col-md-5 col-lg-4 form-control-col">
           <input type="checkbox" name="deviceAlertTracking" <%= data.model.deviceAlertTracking %> />

@@ -7,8 +7,6 @@ var _ = require('lodash');
 var $ = require('jquery');
 var sortable = require('html5sortable');
 var FormView = require('../dataviz/form.view');
-var bootstrap = require('bootstrap');
-var Dialog = require('bootstrap-dialog');
 
 var Layout = FormView.extend({
     template: require('./cluster.form_subclusters.tpl.html'),
@@ -20,6 +18,14 @@ var Layout = FormView.extend({
 
     onShow: function(options) {
       this.onLoad();
+    },
+
+    serializeData: function() {
+        return {
+          model: this.model.toJSON(),
+          config: this.model.config,
+          revisions: this.revisions
+        };
     },
 
     onReady: function(options) {
@@ -34,28 +40,19 @@ var Layout = FormView.extend({
       if ($sortables.length) {
         this.initSortables($sortables);
       }
-      this.$el.find('.restorable').find('.btn-preview').click(function() {
-        var revId = $(this).parents('.restorable').find('select').val();
-        if (!revId) {
-          return false;
+      this.initRestorable({
+        $target: this.$el.find('.restorable'),
+        loadPreview: function(revId) {
+          return self.model.loadRevision('configFile', revId);
+        },
+        loadContent: function(revId) {
+          var dfd = $.Deferred();
+          self.model.loadRevision('configFile', revId).done(function(response) {
+            dfd.resolve(response.configdata);
+          });
+
+          return dfd.promise();
         }
-        var $message = $('<textarea class="form-control"></textarea>');
-        var dialog = Dialog.show({
-            title: '',
-            message: $message
-        });
-        self.model.loadRevision('configFile', revId).done(function(response) {
-          $message.val(JSON.stringify(response, null, '  '));
-        });
-      });
-      this.$el.find('.restorable').find('.btn-apply').click(function() {
-        var $parent = $(this).parents('.restorable');
-        var revId = $parent.find('select').val();
-        $parent.addClass('loading');
-        self.model.loadRevision('configFile', revId).done(function(response) {
-          $parent.removeClass('loading');
-          $parent.find('textarea').val(JSON.stringify(response.configdata, null, '  '));
-        });
       });
     },
 
@@ -113,14 +110,6 @@ var Layout = FormView.extend({
         var $me = $(this);
         $me.parents('.row').remove();
       });
-    },
-
-    serializeData: function() {
-        return {
-          model: this.model.toJSON(),
-          config: this.model.config,
-          revisions: this.revisions
-        };
     },
 
     onBeforeSubmit: function() {
